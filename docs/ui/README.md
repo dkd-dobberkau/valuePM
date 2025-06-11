@@ -1,6 +1,6 @@
 # Value-Based IT Project Management - UI Documentation
 
-*Generated automatically on 2025-06-11 18:13:11*
+*Generated automatically on 2025-06-11 18:18:53*
 
 ## Overview
 
@@ -18,17 +18,7 @@ The application requires authentication to access project data and features.
 ### Portfolio Dashboard
 The main dashboard provides an overview of all projects, key metrics, and portfolio performance.
 
-![Dashboard Overview](screenshots/02_dashboard_overview.png)
-
-### Portfolio Metrics
-Key performance indicators for the entire project portfolio.
-
-![Portfolio Metrics](screenshots/03_portfolio_metrics.png)
-
-### Portfolio Charts
-Visual representations of project distribution by type and status.
-
-![Portfolio Charts](screenshots/04_portfolio_charts.png)
+![Portfolio Dashboard](screenshots/02_dashboard_overview.png)
 
 ### Projects Table
 Detailed table view of all projects with their current status and ROI.
@@ -40,35 +30,28 @@ Detailed table view of all projects with their current status and ROI.
 ### Project Detail View
 Detailed view of individual projects showing metrics progress and recent measurements.
 
-![Project Detail](screenshots/06_project_detail.png)
+![Project Detail View](screenshots/06_project_detail.png)
 
 ### Metrics Progress
 Visual progress indicators for project value metrics.
 
 ![Metrics Progress](screenshots/07_metrics_progress.png)
 
-### Measurements Trend
-Historical measurement data displayed in interactive charts.
-
-![Measurements Chart](screenshots/08_measurements_chart.png)
-
 ### Create New Project
 Form for creating new projects with template-based metric selection.
 
-![Create Project](screenshots/09_create_project.png)
+![Create New Project](screenshots/09_create_project.png)
 
 ## Responsive Design
 
-The application is optimized for different screen sizes and devices.
-
 ### Desktop View (1920x1080)
-![Desktop View](screenshots/10_desktop_view.png)
+![Desktop View (1920x1080)](screenshots/10_desktop_view.png)
 
 ### Tablet View (768x1024)
-![Tablet View](screenshots/10_tablet_view.png)
+![Tablet View (768x1024)](screenshots/10_tablet_view.png)
 
 ### Mobile View (375x812)
-![Mobile View](screenshots/10_mobile_view.png)
+![Mobile View (375x812)](screenshots/10_mobile_view.png)
 
 ## Features Demonstrated
 

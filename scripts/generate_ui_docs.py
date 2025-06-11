@@ -242,6 +242,59 @@ class StreamlitUIDocGenerator:
         """Generate markdown documentation with screenshots"""
         print("📝 Generating documentation...")
         
+        # Build screenshot gallery based on existing files
+        screenshot_sections = []
+        
+        # Check which screenshots exist and build sections accordingly
+        screenshots = {
+            "01_login_page.png": {
+                "title": "Login Page",
+                "description": "The application requires authentication to access project data and features.",
+                "section": "Login & Authentication"
+            },
+            "02_dashboard_overview.png": {
+                "title": "Portfolio Dashboard", 
+                "description": "The main dashboard provides an overview of all projects, key metrics, and portfolio performance.",
+                "section": "Dashboard Overview"
+            },
+            "05_projects_table.png": {
+                "title": "Projects Table",
+                "description": "Detailed table view of all projects with their current status and ROI.",
+                "section": "Dashboard Overview"
+            },
+            "06_project_detail.png": {
+                "title": "Project Detail View",
+                "description": "Detailed view of individual projects showing metrics progress and recent measurements.",
+                "section": "Project Management"
+            },
+            "07_metrics_progress.png": {
+                "title": "Metrics Progress",
+                "description": "Visual progress indicators for project value metrics.",
+                "section": "Project Management"
+            },
+            "09_create_project.png": {
+                "title": "Create New Project",
+                "description": "Form for creating new projects with template-based metric selection.",
+                "section": "Project Management"
+            },
+            "10_desktop_view.png": {
+                "title": "Desktop View (1920x1080)",
+                "description": "",
+                "section": "Responsive Design"
+            },
+            "10_tablet_view.png": {
+                "title": "Tablet View (768x1024)",
+                "description": "",
+                "section": "Responsive Design"
+            },
+            "10_mobile_view.png": {
+                "title": "Mobile View (375x812)",
+                "description": "",
+                "section": "Responsive Design"
+            }
+        }
+        
+        # Build documentation content
         doc_content = f"""# Value-Based IT Project Management - UI Documentation
 
 *Generated automatically on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*
@@ -250,71 +303,30 @@ class StreamlitUIDocGenerator:
 
 This documentation provides a visual walkthrough of the Value-Based IT Project Management System's user interface.
 
-## Login & Authentication
-
-### Login Page
-The application requires authentication to access project data and features.
-
-![Login Page](screenshots/01_login_page.png)
-
-## Dashboard Overview
-
-### Portfolio Dashboard
-The main dashboard provides an overview of all projects, key metrics, and portfolio performance.
-
-![Dashboard Overview](screenshots/02_dashboard_overview.png)
-
-### Portfolio Metrics
-Key performance indicators for the entire project portfolio.
-
-![Portfolio Metrics](screenshots/03_portfolio_metrics.png)
-
-### Portfolio Charts
-Visual representations of project distribution by type and status.
-
-![Portfolio Charts](screenshots/04_portfolio_charts.png)
-
-### Projects Table
-Detailed table view of all projects with their current status and ROI.
-
-![Projects Table](screenshots/05_projects_table.png)
-
-## Project Management
-
-### Project Detail View
-Detailed view of individual projects showing metrics progress and recent measurements.
-
-![Project Detail](screenshots/06_project_detail.png)
-
-### Metrics Progress
-Visual progress indicators for project value metrics.
-
-![Metrics Progress](screenshots/07_metrics_progress.png)
-
-### Measurements Trend
-Historical measurement data displayed in interactive charts.
-
-![Measurements Chart](screenshots/08_measurements_chart.png)
-
-### Create New Project
-Form for creating new projects with template-based metric selection.
-
-![Create Project](screenshots/09_create_project.png)
-
-## Responsive Design
-
-The application is optimized for different screen sizes and devices.
-
-### Desktop View (1920x1080)
-![Desktop View](screenshots/10_desktop_view.png)
-
-### Tablet View (768x1024)
-![Tablet View](screenshots/10_tablet_view.png)
-
-### Mobile View (375x812)
-![Mobile View](screenshots/10_mobile_view.png)
-
-## Features Demonstrated
+"""
+        
+        # Group screenshots by section
+        sections = {}
+        for filename, info in screenshots.items():
+            screenshot_path = self.screenshots_dir / filename
+            if screenshot_path.exists():
+                if info["section"] not in sections:
+                    sections[info["section"]] = []
+                sections[info["section"]].append((filename, info))
+        
+        # Generate sections
+        for section_name, items in sections.items():
+            doc_content += f"## {section_name}\n\n"
+            
+            for filename, info in items:
+                if info["description"]:
+                    doc_content += f"### {info['title']}\n{info['description']}\n\n"
+                else:
+                    doc_content += f"### {info['title']}\n"
+                doc_content += f"![{info['title']}](screenshots/{filename})\n\n"
+        
+        # Add features and technical info
+        doc_content += """## Features Demonstrated
 
 ### ✅ Completed Features
 - User authentication and session management
@@ -358,6 +370,11 @@ The application uses a sidebar navigation with the following sections:
             f.write(doc_content)
         
         print(f"✅ Documentation written to {self.docs_dir / 'README.md'}")
+        
+        # Report which screenshots were included/missing
+        total_expected = len(screenshots)
+        total_found = len([f for f in screenshots.keys() if (self.screenshots_dir / f).exists()])
+        print(f"📊 Screenshots: {total_found}/{total_expected} found and included in documentation")
     
     def cleanup(self):
         """Stop Streamlit process"""
