@@ -85,3 +85,16 @@ init-db:
 # Create superuser
 create-superuser:
 	python scripts/create_superuser.py
+
+# UI Documentation
+ui-docs:
+	python scripts/generate_ui_docs.py
+
+# Visual regression testing  
+visual-test:
+	python scripts/visual_regression_test.py
+
+# Install UI testing dependencies
+install-ui-deps:
+	pip install playwright opencv-python
+	playwright install chromium

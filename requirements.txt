@@ -36,8 +36,13 @@ email-validator==2.1.0
 pytest==7.4.3
 pytest-cov==4.1.0
 pytest-asyncio==0.21.1
+pytest-html==3.2.0
 httpx==0.25.2
 faker==20.1.0
+
+# UI Documentation and Testing
+playwright==1.40.0
+opencv-python==4.8.1.78
 
 # Development Tools
 black==23.11.0
