@@ -1,7 +1,7 @@
 # Multi-stage Dockerfile for Value-Based IT Project Management
 
 # Stage 1: Base image
-FROM python:3.9-slim as base
+FROM python:3.9-slim AS base
 
 # Set working directory
 WORKDIR /app
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Stage 2: Dependencies
-FROM base as dependencies
+FROM base AS dependencies
 
 # Copy requirements
 COPY requirements.txt .
@@ -22,7 +22,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Stage 3: Application
-FROM dependencies as app
+FROM dependencies AS app
 
 # Copy application code
 COPY . .
