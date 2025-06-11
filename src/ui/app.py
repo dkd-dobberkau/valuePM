@@ -272,12 +272,17 @@ def project_detail_page(project_id: str):
         for _, row in df_metrics.iterrows():
             col1, col2 = st.columns([3, 1])
             with col1:
+                current_text = f"{row['Current']:.1f}" if row['Current'] is not None else "No data"
+                target_text = f"{row['Target']:.1f}" if row['Target'] is not None else "No target"
+                progress_value = min(100, max(0, int(row['Progress']) if row['Progress'] is not None else 0)) / 100
+                
                 st.progress(
-                    min(100, max(0, int(row['Progress']))) / 100,
-                    text=f"{row['Metric']}: {row['Current']:.1f} / {row['Target']:.1f}"
+                    progress_value,
+                    text=f"{row['Metric']}: {current_text} / {target_text}"
                 )
             with col2:
-                st.write(f"{row['Progress']:.1f}%")
+                progress_percent = f"{row['Progress']:.1f}%" if row['Progress'] is not None else "0%"
+                st.write(progress_percent)
     
     # Recent measurements chart
     if dashboard['recent_measurements']:
