@@ -86,6 +86,10 @@ init-db:
 create-superuser:
 	python scripts/create_superuser.py
 
+# Populate sample data
+populate-sample-data:
+	python3 scripts/populate_sample_data.py
+
 # UI Documentation
 ui-docs:
 	python3 scripts/generate_ui_docs.py

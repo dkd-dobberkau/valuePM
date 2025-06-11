@@ -61,7 +61,14 @@ python -m uvicorn src.api.main:app --reload
 python -m streamlit run src/ui/app.py
 ```
 
-### 5. Access the Application
+### 5. Populate Sample Data (Optional)
+
+```bash
+# Add sample projects and metrics for demonstration
+make populate-sample-data
+```
+
+### 6. Access the Application
 
 - Web UI: http://localhost:8501
 - API Docs: http://localhost:8000/api/v1/docs
@@ -82,6 +89,9 @@ docker-compose run --rm api alembic upgrade head
 
 # Create superuser
 docker-compose run --rm api python scripts/create_superuser.py
+
+# Populate sample data (optional)
+docker-compose run --rm api python scripts/populate_sample_data.py
 ```
 
 ### 2. Access Services
