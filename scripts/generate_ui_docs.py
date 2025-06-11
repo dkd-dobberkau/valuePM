@@ -17,9 +17,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 class StreamlitUIDocGenerator:
     """Generate comprehensive UI documentation with screenshots"""
     
-    def __init__(self, app_path="src/ui/app.py", base_url="http://localhost:8501"):
+    def __init__(self, app_path="src/ui/app.py", base_url="http://localhost:8501", use_existing_app=True):
         self.app_path = app_path
         self.base_url = base_url
+        self.use_existing_app = use_existing_app
         self.docs_dir = Path("docs/ui")
         self.screenshots_dir = self.docs_dir / "screenshots"
         self.streamlit_process = None
@@ -29,30 +30,47 @@ class StreamlitUIDocGenerator:
         self.screenshots_dir.mkdir(exist_ok=True)
     
     def start_streamlit_app(self):
-        """Start Streamlit app in background"""
-        print("🚀 Starting Streamlit app...")
+        """Start Streamlit app in background or use existing one"""
+        if self.use_existing_app:
+            print("🔗 Using existing Streamlit app...")
+            # Check if app is accessible
+            try:
+                import requests
+                response = requests.get(self.base_url, timeout=5)
+                if response.status_code == 200:
+                    print("✅ Existing Streamlit app is accessible")
+                    return
+                else:
+                    print("⚠️ Existing app not responding, will try to start new one")
+                    self.use_existing_app = False
+            except Exception as e:
+                print(f"⚠️ Cannot reach existing app: {e}, will try to start new one")
+                self.use_existing_app = False
         
-        # Set environment variables for Docker compatibility
-        env = os.environ.copy()
-        env['API_HOST'] = 'localhost'
-        env['API_PORT'] = '8000'
-        
-        self.streamlit_process = subprocess.Popen(
-            ["python", "-m", "streamlit", "run", self.app_path, 
-             "--server.port", "8501", "--server.headless", "true"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env
-        )
-        
-        # Wait for app to start
-        print("⏳ Waiting for app to initialize...")
-        time.sleep(15)
-        
-        # Check if process is still running
-        if self.streamlit_process.poll() is not None:
-            stdout, stderr = self.streamlit_process.communicate()
-            raise Exception(f"Streamlit failed to start: {stderr.decode()}")
+        if not self.use_existing_app:
+            print("🚀 Starting new Streamlit app...")
+            
+            # Set environment variables for Docker compatibility
+            env = os.environ.copy()
+            env['API_HOST'] = 'localhost'
+            env['API_PORT'] = '8000'
+            
+            self.streamlit_process = subprocess.Popen(
+                [sys.executable, "-m", "streamlit", "run", self.app_path, 
+                 "--server.port", "8501", "--server.headless", "true"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env
+            )
+            
+            # Wait for app to start
+            print("⏳ Waiting for app to initialize...")
+            time.sleep(15)
+            
+            # Check if process is still running
+            if self.streamlit_process.poll() is not None:
+                stdout, stderr = self.streamlit_process.communicate()
+                raise Exception(f"Streamlit failed to start: {stderr.decode()}")
     
     def capture_screenshots(self):
         """Generate comprehensive screenshots"""
@@ -343,13 +361,15 @@ The application uses a sidebar navigation with the following sections:
     
     def cleanup(self):
         """Stop Streamlit process"""
-        if self.streamlit_process:
+        if self.streamlit_process and not self.use_existing_app:
             print("🛑 Stopping Streamlit app...")
             self.streamlit_process.terminate()
             try:
                 self.streamlit_process.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 self.streamlit_process.kill()
+        elif self.use_existing_app:
+            print("✅ Leaving existing Streamlit app running")
     
     def run(self):
         """Execute full documentation generation pipeline"""

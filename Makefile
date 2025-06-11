@@ -88,11 +88,11 @@ create-superuser:
 
 # UI Documentation
 ui-docs:
-	python scripts/generate_ui_docs.py
+	python3 scripts/generate_ui_docs.py
 
 # Visual regression testing  
 visual-test:
-	python scripts/visual_regression_test.py
+	python3 scripts/visual_regression_test.py
 
 # Install UI testing dependencies
 install-ui-deps:
