@@ -12,7 +12,7 @@ from src.core.config import settings
 
 # Configure Streamlit
 st.set_page_config(
-    page_title="Value-Based IT Project Management",
+    page_title="ValuePM - Value-Based Project Management",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -159,7 +159,7 @@ def login_page():
 
 def dashboard_page():
     """Main dashboard page"""
-    st.title("📊 Value-Based IT Project Management")
+    st.title("📊 ValuePM - Value-Based Project Management")
     
     # Get portfolio overview
     portfolio = api.get("/projects/portfolio/overview")

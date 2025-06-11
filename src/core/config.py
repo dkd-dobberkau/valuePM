@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     """Application settings with environment variable support"""
     
     # Application
-    APP_NAME: str = "Value-Based IT Project Management"
+    APP_NAME: str = "ValuePM - Value-Based Project Management"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = Field(default=False, env="DEBUG")
     TESTING: bool = Field(default=False, env="TESTING")

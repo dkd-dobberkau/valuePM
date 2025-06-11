@@ -1,8 +1,8 @@
-# Value-Based IT Project Management System
+# ValuePM - Value-Based IT Project Management System
 
 ## Project Overview
 
-This is a Python application for managing IT projects based on actual business value delivery rather than traditional scope/time/budget metrics. The system tracks, measures, and reports on the real business impact of infrastructure, software development, and digital transformation projects.
+ValuePM is a Python application for managing IT projects based on actual business value delivery rather than traditional scope/time/budget metrics. The system tracks, measures, and reports on the real business impact of infrastructure, software development, and digital transformation projects.
 
 ## Core Concept
 

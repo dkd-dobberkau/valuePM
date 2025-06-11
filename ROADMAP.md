@@ -1,4 +1,4 @@
-# Value-Based IT Project Management System - Roadmap
+# ValuePM - Roadmap
 
 ## Current Status (v1.0-alpha)
 

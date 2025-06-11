@@ -13,7 +13,7 @@ from src.api.routers import projects, metrics, measurements, stakeholders, auth
 async def lifespan(app: FastAPI):
     """Handle application startup and shutdown"""
     # Startup
-    print("Starting up Value-Based PM API...")
+    print("Starting up ValuePM API...")
     init_db()
     yield
     # Shutdown

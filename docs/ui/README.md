@@ -1,10 +1,10 @@
-# Value-Based IT Project Management - UI Documentation
+# ValuePM - UI Documentation
 
-*Generated automatically on 2025-06-11 18:23:51*
+*Generated automatically on 2025-06-11 18:30:51*
 
 ## Overview
 
-This documentation provides a visual walkthrough of the Value-Based IT Project Management System's user interface.
+This documentation provides a visual walkthrough of ValuePM's user interface - a Value-Based Project Management System.
 
 ## Login & Authentication
 

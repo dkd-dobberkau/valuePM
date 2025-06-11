@@ -323,13 +323,13 @@ class StreamlitUIDocGenerator:
         }
         
         # Build documentation content
-        doc_content = f"""# Value-Based IT Project Management - UI Documentation
+        doc_content = f"""# ValuePM - UI Documentation
 
 *Generated automatically on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*
 
 ## Overview
 
-This documentation provides a visual walkthrough of the Value-Based IT Project Management System's user interface.
+This documentation provides a visual walkthrough of ValuePM's user interface - a Value-Based Project Management System.
 
 """
         
