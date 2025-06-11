@@ -12,8 +12,8 @@
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd value-pm
+git clone https://github.com/dkd-dobberkau/valuePM.git
+cd valuePM
 
 # Create virtual environment
 python -m venv venv
