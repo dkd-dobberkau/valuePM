@@ -115,6 +115,34 @@ class StreamlitUIDocGenerator:
     def _capture_login_page(self, page):
         """Capture login page"""
         print("📷 Capturing login page...")
+        
+        # Clear any existing session state to ensure we see the login page
+        page.evaluate("""
+            // Clear localStorage and sessionStorage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Clear cookies
+            document.cookie.split(";").forEach(function(c) { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+        """)
+        
+        # Reload page to show login
+        page.reload()
+        page.wait_for_load_state('networkidle')
+        
+        # Wait for Streamlit to fully render and show login form
+        import time
+        time.sleep(3)
+        
+        # Try to wait for login form elements
+        try:
+            page.wait_for_selector('input[type="text"], input[type="password"], button:has-text("Login")', timeout=5000)
+            print("✅ Login form detected")
+        except:
+            print("⚠️ Login form not detected, taking screenshot anyway")
+        
         page.screenshot(
             path=self.screenshots_dir / "01_login_page.png",
             full_page=True
