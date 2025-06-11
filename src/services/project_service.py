@@ -122,9 +122,9 @@ class ProjectService:
             
             # Calculate ROI
             if current_value is not None:
-                if metric.metric_type.value == "currency":
+                if metric.metric_type == "currency":
                     roi_summary[metric.name] = current_value
-                elif metric.metric_type.value == "percentage" and metric.baseline_value > 0:
+                elif metric.metric_type == "percentage" and metric.baseline_value > 0:
                     improvement = (current_value - metric.baseline_value) / metric.baseline_value
                     roi_summary[metric.name] = improvement
         
@@ -141,7 +141,7 @@ class ProjectService:
         dashboard = schemas.ProjectDashboard(
             project_info={
                 "name": project.name,
-                "type": project.project_type.value,
+                "type": project.project_type,
                 "status": project.status,
                 "duration_days": (datetime.now().date() - project.start_date).days if project.start_date else 0
             },
@@ -169,7 +169,7 @@ class ProjectService:
         
         for project in projects:
             # Count by type
-            type_key = project.project_type.value
+            type_key = project.project_type
             by_type[type_key] = by_type.get(type_key, 0) + 1
             
             # Count by status
@@ -182,13 +182,13 @@ class ProjectService:
             roi_total = 0.0
             for metric in project.metrics:
                 if metric.current_value is not None:
-                    if metric.metric_type.value == "currency":
+                    if metric.metric_type == "currency":
                         roi_total += metric.current_value
             
             project_summaries.append({
                 "id": project.id,
                 "name": project.name,
-                "type": project.project_type.value,
+                "type": project.project_type,
                 "status": project.status,
                 "estimated_value": project.estimated_total_value,
                 "current_roi": roi_total

@@ -11,7 +11,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.db.database import SessionLocal
 from src.db.models import Project, ValueMetric, Measurement
-from src.core.enums import ProjectType, ProjectStatus, MetricType, ValueCategory
 
 
 def populate_sample_data():
@@ -31,8 +30,8 @@ def populate_sample_data():
             {
                 "id": str(uuid.uuid4()),
                 "name": "AWS Cloud Migration",
-                "project_type": ProjectType.INFRASTRUCTURE,
-                "status": ProjectStatus.ACTIVE,
+                "project_type": "infrastructure",
+                "status": "active",
                 "start_date": date.today() - timedelta(days=90),
                 "end_date": date.today() + timedelta(days=60),
                 "business_case": "Migrate on-premises infrastructure to AWS to reduce operational costs and improve scalability.",
@@ -41,8 +40,8 @@ def populate_sample_data():
             {
                 "id": str(uuid.uuid4()),
                 "name": "Customer Self-Service Portal",
-                "project_type": ProjectType.SOFTWARE_DEVELOPMENT,
-                "status": ProjectStatus.ACTIVE,
+                "project_type": "software_development",
+                "status": "active",
                 "start_date": date.today() - timedelta(days=120),
                 "end_date": date.today() + timedelta(days=30),
                 "business_case": "Develop a self-service portal to reduce customer support costs and improve customer satisfaction.",
@@ -51,8 +50,8 @@ def populate_sample_data():
             {
                 "id": str(uuid.uuid4()),
                 "name": "Invoice Processing Automation",
-                "project_type": ProjectType.DIGITAL_TRANSFORMATION,
-                "status": ProjectStatus.COMPLETED,
+                "project_type": "digital_transformation",
+                "status": "completed",
                 "start_date": date.today() - timedelta(days=180),
                 "end_date": date.today() - timedelta(days=30),
                 "business_case": "Automate invoice processing to reduce manual effort and improve accuracy.",
@@ -61,8 +60,8 @@ def populate_sample_data():
             {
                 "id": str(uuid.uuid4()),
                 "name": "Network Infrastructure Upgrade",
-                "project_type": ProjectType.INFRASTRUCTURE,
-                "status": ProjectStatus.PLANNING,
+                "project_type": "infrastructure",
+                "status": "planning",
                 "start_date": date.today() + timedelta(days=30),
                 "end_date": date.today() + timedelta(days=180),
                 "business_case": "Upgrade network infrastructure to support increased bandwidth requirements.",
@@ -71,8 +70,8 @@ def populate_sample_data():
             {
                 "id": str(uuid.uuid4()),
                 "name": "AI Customer Support Chatbot",
-                "project_type": ProjectType.SOFTWARE_DEVELOPMENT,
-                "status": ProjectStatus.ACTIVE,
+                "project_type": "software_development",
+                "status": "active",
                 "start_date": date.today() - timedelta(days=60),
                 "end_date": date.today() + timedelta(days=90),
                 "business_case": "Implement AI-powered chatbot to handle common customer inquiries and reduce support workload.",
@@ -97,8 +96,8 @@ def populate_sample_data():
                 "project_id": created_projects[0].id,
                 "name": "Infrastructure Cost Reduction",
                 "description": "Monthly cost savings from cloud migration",
-                "metric_type": MetricType.CURRENCY,
-                "value_category": ValueCategory.COST_REDUCTION,
+                "metric_type": "currency",
+                "category": "cost_reduction",
                 "baseline_value": 50000.0,
                 "target_value": 35000.0,
                 "measurement_frequency": "monthly",
@@ -108,8 +107,8 @@ def populate_sample_data():
                 "project_id": created_projects[0].id,
                 "name": "System Availability",
                 "description": "Uptime percentage of migrated systems",
-                "metric_type": MetricType.PERCENTAGE,
-                "value_category": ValueCategory.QUALITY_IMPROVEMENT,
+                "metric_type": "percentage",
+                "category": "quality_improvement",
                 "baseline_value": 95.0,
                 "target_value": 99.5,
                 "measurement_frequency": "weekly",
@@ -119,8 +118,8 @@ def populate_sample_data():
                 "project_id": created_projects[0].id,
                 "name": "Deployment Speed",
                 "description": "Time to deploy new applications (hours)",
-                "metric_type": MetricType.TIME,
-                "value_category": ValueCategory.EFFICIENCY_GAIN,
+                "metric_type": "time",
+                "category": "efficiency_gain",
                 "baseline_value": 48.0,
                 "target_value": 2.0,
                 "measurement_frequency": "per_deployment",
@@ -132,8 +131,8 @@ def populate_sample_data():
                 "project_id": created_projects[1].id,
                 "name": "Support Ticket Reduction",
                 "description": "Reduction in customer support tickets per month",
-                "metric_type": MetricType.COUNT,
-                "value_category": ValueCategory.COST_REDUCTION,
+                "metric_type": "count",
+                "category": "cost_reduction",
                 "baseline_value": 1000.0,
                 "target_value": 700.0,
                 "measurement_frequency": "monthly",
@@ -143,8 +142,8 @@ def populate_sample_data():
                 "project_id": created_projects[1].id,
                 "name": "Customer Satisfaction Score",
                 "description": "Customer satisfaction rating (1-10)",
-                "metric_type": MetricType.SCORE,
-                "value_category": ValueCategory.USER_SATISFACTION,
+                "metric_type": "score",
+                "category": "user_satisfaction",
                 "baseline_value": 6.5,
                 "target_value": 8.5,
                 "measurement_frequency": "monthly",
@@ -154,8 +153,8 @@ def populate_sample_data():
                 "project_id": created_projects[1].id,
                 "name": "Self-Service Adoption Rate",
                 "description": "Percentage of customers using self-service",
-                "metric_type": MetricType.PERCENTAGE,
-                "value_category": ValueCategory.USER_SATISFACTION,
+                "metric_type": "percentage",
+                "category": "user_satisfaction",
                 "baseline_value": 20.0,
                 "target_value": 75.0,
                 "measurement_frequency": "weekly",
@@ -167,8 +166,8 @@ def populate_sample_data():
                 "project_id": created_projects[2].id,
                 "name": "Processing Time Reduction",
                 "description": "Time to process invoice (minutes)",
-                "metric_type": MetricType.TIME,
-                "value_category": ValueCategory.EFFICIENCY_GAIN,
+                "metric_type": "time",
+                "category": "efficiency_gain",
                 "baseline_value": 30.0,
                 "target_value": 5.0,
                 "measurement_frequency": "daily",
@@ -178,8 +177,8 @@ def populate_sample_data():
                 "project_id": created_projects[2].id,
                 "name": "Error Rate Reduction",
                 "description": "Percentage of invoices with errors",
-                "metric_type": MetricType.PERCENTAGE,
-                "value_category": ValueCategory.QUALITY_IMPROVEMENT,
+                "metric_type": "percentage",
+                "category": "quality_improvement",
                 "baseline_value": 8.0,
                 "target_value": 1.0,
                 "measurement_frequency": "weekly",
@@ -189,8 +188,8 @@ def populate_sample_data():
                 "project_id": created_projects[2].id,
                 "name": "Staff Cost Savings",
                 "description": "Monthly savings from automation",
-                "metric_type": MetricType.CURRENCY,
-                "value_category": ValueCategory.COST_REDUCTION,
+                "metric_type": "currency",
+                "category": "cost_reduction",
                 "baseline_value": 0.0,
                 "target_value": 8000.0,
                 "measurement_frequency": "monthly",
@@ -202,8 +201,8 @@ def populate_sample_data():
                 "project_id": created_projects[3].id,
                 "name": "Network Bandwidth",
                 "description": "Available network bandwidth (Gbps)",
-                "metric_type": MetricType.COUNT,
-                "value_category": ValueCategory.QUALITY_IMPROVEMENT,
+                "metric_type": "count",
+                "category": "quality_improvement",
                 "baseline_value": 1.0,
                 "target_value": 10.0,
                 "measurement_frequency": "weekly",
@@ -213,8 +212,8 @@ def populate_sample_data():
                 "project_id": created_projects[3].id,
                 "name": "Network Latency",
                 "description": "Average network latency (ms)",
-                "metric_type": MetricType.TIME,
-                "value_category": ValueCategory.QUALITY_IMPROVEMENT,
+                "metric_type": "time",
+                "category": "quality_improvement",
                 "baseline_value": 50.0,
                 "target_value": 10.0,
                 "measurement_frequency": "daily",
@@ -226,8 +225,8 @@ def populate_sample_data():
                 "project_id": created_projects[4].id,
                 "name": "Query Resolution Rate",
                 "description": "Percentage of queries resolved by chatbot",
-                "metric_type": MetricType.PERCENTAGE,
-                "value_category": ValueCategory.EFFICIENCY_GAIN,
+                "metric_type": "percentage",
+                "category": "efficiency_gain",
                 "baseline_value": 0.0,
                 "target_value": 80.0,
                 "measurement_frequency": "daily",
@@ -237,8 +236,8 @@ def populate_sample_data():
                 "project_id": created_projects[4].id,
                 "name": "Response Time",
                 "description": "Average chatbot response time (seconds)",
-                "metric_type": MetricType.TIME,
-                "value_category": ValueCategory.USER_SATISFACTION,
+                "metric_type": "time",
+                "category": "user_satisfaction",
                 "baseline_value": 300.0,
                 "target_value": 5.0,
                 "measurement_frequency": "daily",
@@ -248,8 +247,8 @@ def populate_sample_data():
                 "project_id": created_projects[4].id,
                 "name": "Support Cost Savings",
                 "description": "Monthly savings from reduced support staff",
-                "metric_type": MetricType.CURRENCY,
-                "value_category": ValueCategory.COST_REDUCTION,
+                "metric_type": "currency",
+                "category": "cost_reduction",
                 "baseline_value": 0.0,
                 "target_value": 15000.0,
                 "measurement_frequency": "monthly",
@@ -273,11 +272,11 @@ def populate_sample_data():
         # Generate measurements for each metric showing progress over time
         for metric in created_metrics:
             # Skip measurements for planning projects
-            if metric.project.status == ProjectStatus.PLANNING:
+            if metric.project.status == "planning":
                 continue
                 
             # Number of measurements based on project status
-            if metric.project.status == ProjectStatus.COMPLETED:
+            if metric.project.status == "completed":
                 num_measurements = 8
             else:
                 num_measurements = 5
@@ -304,7 +303,7 @@ def populate_sample_data():
                 value = value * (1 + random.uniform(-variation, variation))
                 
                 # Ensure value doesn't go negative for certain metric types
-                if metric.metric_type in [MetricType.PERCENTAGE, MetricType.COUNT]:
+                if metric.metric_type in ["PERCENTAGE", "COUNT"]:
                     value = max(0, value)
                 
                 measurements_data.append({

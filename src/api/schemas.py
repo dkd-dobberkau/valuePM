@@ -58,10 +58,10 @@ class TokenData(BaseSchema):
 # Project schemas
 class ProjectBase(BaseSchema):
     name: str
-    project_type: ProjectType
+    project_type: str
     start_date: Optional[date] = None
     end_date: Optional[date] = None
-    status: ProjectStatus = ProjectStatus.PLANNING
+    status: str = "planning"
     business_case: Optional[str] = None
     estimated_total_value: float = 0.0
 
@@ -74,7 +74,7 @@ class ProjectUpdate(BaseSchema):
     name: Optional[str] = None
     start_date: Optional[date] = None
     end_date: Optional[date] = None
-    status: Optional[ProjectStatus] = None
+    status: Optional[str] = None
     business_case: Optional[str] = None
     estimated_total_value: Optional[float] = None
 
@@ -96,12 +96,12 @@ class ProjectWithMetrics(Project):
 class ValueMetricBase(BaseSchema):
     name: str
     description: Optional[str] = None
-    category: ValueCategory
-    metric_type: MetricType
+    category: str
+    metric_type: str
     target_value: float
     baseline_value: float
     current_value: Optional[float] = None
-    measurement_frequency: MeasurementFrequency = MeasurementFrequency.MONTHLY
+    measurement_frequency: str = "monthly"
     is_active: bool = True
 
 
@@ -115,7 +115,7 @@ class ValueMetricUpdate(BaseSchema):
     target_value: Optional[float] = None
     baseline_value: Optional[float] = None
     current_value: Optional[float] = None
-    measurement_frequency: Optional[MeasurementFrequency] = None
+    measurement_frequency: Optional[str] = None
     is_active: Optional[bool] = None
 
 
@@ -181,7 +181,7 @@ class DeliverableBase(BaseSchema):
     expected_completion: date
     actual_completion: Optional[date] = None
     value_contribution: Dict[str, float] = {}
-    status: DeliverableStatus = DeliverableStatus.PLANNED
+    status: str = "planned"
 
 
 class DeliverableCreate(DeliverableBase):

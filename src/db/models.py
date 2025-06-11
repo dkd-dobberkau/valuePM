@@ -11,6 +11,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.dialects.postgresql import UUID
+import enum
 
 from src.core.enums import ProjectType, ValueCategory, MetricType
 
@@ -35,7 +36,7 @@ class Project(Base):
     
     id = Column(String, primary_key=True, default=generate_uuid)
     name = Column(String(255), nullable=False)
-    project_type = Column(SQLEnum(ProjectType), nullable=False)
+    project_type = Column(String(50), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     start_date = Column(Date, nullable=True)
@@ -61,8 +62,8 @@ class ValueMetric(Base):
     project_id = Column(String, ForeignKey('projects.id'), nullable=False)
     name = Column(String(255), nullable=False)
     description = Column(Text, nullable=True)
-    category = Column(SQLEnum(ValueCategory), nullable=False)
-    metric_type = Column(SQLEnum(MetricType), nullable=False)
+    category = Column(String(50), nullable=False)
+    metric_type = Column(String(50), nullable=False)
     target_value = Column(Float, nullable=False)
     baseline_value = Column(Float, nullable=False)
     current_value = Column(Float, nullable=True)
