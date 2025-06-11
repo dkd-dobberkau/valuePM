@@ -1,0 +1,24 @@
+# Include production requirements
+-r requirements.txt
+
+# Additional development tools
+ipython==8.18.1
+jupyterlab==4.0.9
+watchdog==3.0.0
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+myst-parser==2.0.0
+
+# Debugging
+ipdb==0.13.13
+django-extensions==3.2.3
+
+# Performance profiling
+memory-profiler==0.61.0
+line-profiler==4.1.2
+
+# Security scanning
+bandit==1.7.5
+safety==3.0.1
